@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.bg-progress {
+  background-image: 
+    url('./assets/vector1.png'), url('./assets/vector3.png'),
+    linear-gradient(to right, #9f62f2, #632ee3);
+  background-size: auto,auto;         
+  background-position: top left, top right;   
+  background-repeat: no-repeat, no-repeat;
+}
+
+.bg-resolved {
+  background-image: 
+    url('./assets/vector1.png'), url('./assets/vector3.png'),
+    linear-gradient(to right, #00827a, #54cf68);
+  background-size: auto,auto;         
+  background-position: top left, top right;   
+  background-repeat: no-repeat, no-repeat;
+}
