@@ -20,7 +20,6 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
   const [taskStatus, setTaskStatus] = useState([]);
   const [resolvedTasks, setResolvedTasks] = useState([]);
 
-  
   useEffect(() => {
     ticketsPromise
       .then((data) => setTickets(data))
@@ -40,10 +39,7 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
   const handleComplete = (ticket) => {
     setResolvedTasks((prev) => [...prev, ticket]);
     setTaskStatus((prev) => prev.filter((t) => t.id !== ticket.id));
-
-    
     setTickets((prev) => prev.filter((t) => t.id !== ticket.id));
-
     setInProgress((prev) => (prev > 0 ? prev - 1 : 0));
     setResolved((prev) => prev + 1);
 
@@ -51,18 +47,18 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
   };
 
   return (
-    <div className="flex flex-col gap-4 bg-gray-50 p-6 min-h-screen">
-      <div className="flex gap-6">
-       
-        <div className="grid grid-cols-2 gap-[24px] flex-1">
+    <div className="flex flex-col gap-6 bg-gray-50 p-6 min-h-screen">
+      <div className="flex flex-col md:flex-row gap-6">
+        
+        {/* Ticket Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] flex-1">
           {tickets
-            
             .filter((ticket) => !resolvedTasks.some((res) => res.id === ticket.id))
             .map((ticket) => (
               <div
                 key={ticket.id}
                 onClick={() => handleSelectTicket(ticket)}
-                className="bg-white border border-gray-100 shadow-sm rounded-2xl p-4 w-[510px] h-[148px] hover:shadow-md transition relative cursor-pointer"
+                className="bg-white border border-gray-100 shadow-sm rounded-2xl p-4 w-full h-[148px] hover:shadow-md transition relative cursor-pointer"
               >
                 <div className="flex justify-between items-start">
                   <h2 className="text-[18px] font-medium text-gray-800">{ticket.title}</h2>
@@ -100,9 +96,9 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
             ))}
         </div>
 
-        
-        <div className="w-[358px] flex flex-col gap-6">
-          
+        {/* Task & Resolved Section */}
+        <div className="w-full md:w-[358px] flex flex-col gap-6 mt-8 md:mt-0">
+          {/* Task Status */}
           <div className="bg-white shadow-sm rounded-2xl p-5 border border-gray-100">
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">Task Status</h2>
             {taskStatus.length > 0 ? (
@@ -112,7 +108,7 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
                     <p className="text-gray-700 font-medium">{task.title}</p>
                     <button
                       onClick={() => handleComplete(task)}
-                      className="mt-1 bg-green-500 text-white hover:bg-green-600 w-[326px] h-[40px] flex items-center justify-center text-[16px] font-semibold rounded-md"
+                      className="mt-1 bg-green-500 text-white hover:bg-green-600 w-full h-[40px] flex items-center justify-center text-[16px] font-semibold rounded-md"
                     >
                       Complete
                     </button>
@@ -124,7 +120,7 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
             )}
           </div>
 
-      
+          {/* Resolved Task */}
           <div className="bg-white shadow-sm rounded-2xl p-5 border border-gray-100">
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">Resolved Task</h2>
             {resolvedTasks.length > 0 ? (
@@ -136,9 +132,7 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
                   >
                     <div className="flex justify-between items-start">
                       <h3 className="text-sm font-medium text-gray-800">{ticket.title}</h3>
-                      <span
-                        className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700"
-                      >
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
                         Resolved
                       </span>
                     </div>
@@ -156,7 +150,6 @@ const AvailableTickets = ({ ticketsPromise, inProgress, setInProgress, resolved,
           </div>
         </div>
       </div>
-
       <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );

@@ -19,17 +19,12 @@
   background-repeat: no-repeat, no-repeat;
 }
 
-.div{
-    display: flex;
-    justify-content:space-around;
-    justify-items: center;
-}
-li{
-    list-style: none;
-    margin-bottom: 16px;
-    font-weight: lighter;
+li {
+  list-style: none;
+  margin-bottom: 16px;
+  font-weight: lighter;
 }
 
-.parra{
-    text-align: center;
+.parra {
+  text-align: center;
 }
